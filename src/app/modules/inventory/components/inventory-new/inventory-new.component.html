@@ -1,0 +1,133 @@
+<div class="container p-2">
+
+    <div *ngIf="accessoryForm" [formGroup]="accessoryForm">
+
+        <div class="d-flex">
+            <div class="col-6">
+                <div class="input-group mb-3 col-2 d-flex">
+                    <span class="input-group-text" id="basic-addon2">accessoryTier</span>
+                    <input type="text" class="form-control" id="engraving1" formControlName="accessoryTier"
+                        [matAutocomplete]="accessoryTierAutocomplete">
+                    <mat-autocomplete #accessoryTierAutocomplete="matAutocomplete">
+                        <mat-option [value]="option" *ngFor="let option of accessoryTierOptions$ | async">{{option}}</mat-option>
+                    </mat-autocomplete>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="input-group mb-3 col-2 d-flex">
+                    <span class="input-group-text" id="basic-addon2">accessoryType</span>
+                    <input type="text" class="form-control" id="engraving1" formControlName="accessoryType"
+                        [matAutocomplete]="accessoryTypeAucomplete">
+                    <mat-autocomplete #accessoryTypeAucomplete="matAutocomplete">
+                        <mat-option [value]="option" *ngFor="let option of accessoryTypeOptions$ | async">{{option}}</mat-option>
+                    </mat-autocomplete>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex">
+            <div class="col-6">
+                <div class="input-group mb-3 col-2 d-flex">
+                    <span class="input-group-text" id="basic-addon2">stats1</span>
+                    <input type="text" class="form-control" id="engraving1" formControlName="stats1"
+                        [matAutocomplete]="statsAucomplete">
+                    <mat-autocomplete #statsAucomplete="matAutocomplete">
+                        <mat-option [value]="option" *ngFor="let option of stats1Options$ | async">{{option}}</mat-option>
+                    </mat-autocomplete>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="input-group mb-3 col-2 d-flex">
+                    <span class="input-group-text" id="basic-addon2">stats2</span>
+                    <input type="text" class="form-control" id="engraving1" formControlName="stats2"
+                        [matAutocomplete]="stats2Aucomplete">
+                    <mat-autocomplete #stats2Aucomplete="matAutocomplete">
+                        <mat-option [value]="option" *ngFor="let option of stats2Options$ | async">{{option}}</mat-option>
+                    </mat-autocomplete>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="d-flex">
+            <div class="col-6">
+                <div class="input-group mb-3 col-2 d-flex">
+                    <span class="input-group-text" id="basic-addon2">Engraving1</span>
+                    <input type="text" class="form-control" id="engraving1" formControlName="engraving1"
+                        [matAutocomplete]="engraving1Autocopmlete">
+                    <mat-autocomplete #engraving1Autocopmlete="matAutocomplete">
+                        <mat-option [value]="option" *ngFor="let option of engraving1Options$ | async">{{option}}</mat-option>
+                    </mat-autocomplete>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="input-group mb-3 col-2 d-flex">
+                    <span class="input-group-text" id="basic-addon2">Value</span>
+                    <input type="number" class="form-control" id="engraving1Val" formControlName="engraving1Val">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex">
+            <div class="col-6">
+                <div class="input-group mb-3 col-2 d-flex">
+                    <span class="input-group-text" id="basic-addon2">Engraving2</span>
+                    <input type="text" class="form-control" id="engraving1" formControlName="engraving2"
+                        [matAutocomplete]="engraving2Autocopmlete">
+                    <mat-autocomplete #engraving2Autocopmlete="matAutocomplete">
+                        <mat-option [value]="option" *ngFor="let option of engraving2Options$ | async">{{option}}</mat-option>
+                    </mat-autocomplete>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="input-group mb-3 col-2 d-flex">
+                    <span class="input-group-text" id="basic-addon2">Value</span>
+                    <input type="number" class="form-control" id="engraving1Val" formControlName="engraving2Val">
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex">
+            <div class="col-6">
+                <div class="input-group mb-3 col-2 d-flex">
+                    <span class="input-group-text" id="basic-addon2">negative</span>
+                    <input type="text" class="form-control" id="engraving1" formControlName="negative"
+                        [matAutocomplete]="negativeAucomplete">
+                    <mat-autocomplete autoActiveFirstOption #negativeAucomplete="matAutocomplete">
+                        <mat-option [value]="option" *ngFor="let option of negativeOptions$ | async">{{option}}</mat-option>
+                    </mat-autocomplete>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="input-group mb-3 col-2 d-flex">
+                    <span class="input-group-text" id="basic-addon2">Value</span>
+                    <input type="number" class="form-control" id="engraving1Val" formControlName="negativeVal">
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex">
+            <div class="col-6">
+                <div class="input-group mb-3 col-2 d-flex">
+                    <span class="input-group-text" id="basic-addon2">ignName</span>
+                    <input type="text" class="form-control" id="engraving1" formControlName="ignName"
+                        [matAutocomplete]="ignNameAucomplete">
+                    <mat-autocomplete #ignNameAucomplete="matAutocomplete">
+                        <mat-option [value]="option" *ngFor="let option of ignNameOptions$ | async">{{option}}</mat-option>
+                    </mat-autocomplete>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3" (click)="add()">Add</button>
+            <button type="submit" class="btn btn-primary mb-3" (click)="cancel()">Cancel</button>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="container text-center">
+    <img src="../../../../../assets/img/lost-ark-backgroud1.jpg" class="rounded img-fluid img-thumbnail" alt="...">
+
+    <div *ngIf="searchForm" [formGroup]="searchForm">
+
+
+      <div class="d-flex justify-content-center m-2">
+        <div class="form-group col-6  d-flex">
+          <span class="input-group-text" id="basic-addon2">Search</span>
+          <input type="text" formControlName="searchText" class="form-control" id="exampleInputEmail1"
+            aria-describedby="searchText">
+        </div>
+
+
+      </div>
+      <div class="d-flex justify-content-center">
+        <div class="btn-group m-2" role="group" aria-label="Button group with nested dropdown">
+          <button type=" m-3" class="btn btn-primary m-2 rounded-pill" (click)="addNew()">Add New</button>
+          <button type=" p-1" class="btn btn-primary m-2 rounded-pill" (click)="download()">Export JSON</button>
+          <button type=" m-3" class="btn btn-primary m-2 rounded-pill" (click)="resetAccessoryId()">ResetId</button>
+
+        </div>
+      </div>
+
+    </div>
+
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 m-2" matSort (matSortChange)="announceSortChange($event)">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <ng-container *ngFor="let col of propertyBindingColumns;let i = index;let last = last" [matColumnDef]="col">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> {{ displayedColumns[i] }} </th>
+      <td mat-cell *matCellDef="let element" [ngClass]="{'bg-orange':element.accessoryTier =='Relic','bg-silver':element.accessoryTier =='Ancient'}">
+
+        <span *ngIf="col != 'actions'" > 
+          <span>{{ element[col]  }}</span>
+      </span>
+        <div *ngIf="col == 'actions'">
+          <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+            <button type="button" class="btn btn-success m-1 rounded" (click)="viewDetail(element)">Details</button>
+            <button type="button" class="btn btn-danger m-1" (click)="remove(element)">Remove</button>
+          </div>
+
+
+        </div>
+      </td>
+
+    </ng-container>
+
+    <!-- <ng-container matColumnDef="engraving1Val">
+      <th mat-header-cell *matHeaderCellDef> engraving1Val </th>
+      <td mat-cell *matCellDef="let element"> {{element.engraving1Val}} </td>
+    </ng-container> -->
+
+    <tr mat-header-row *matHeaderRowDef="propertyBindingColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: propertyBindingColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="300" showFirstLastButtons
+    aria-label="Select page of periodic elements">
+  </mat-paginator>
+
+</div>

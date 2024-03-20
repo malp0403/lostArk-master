@@ -1,0 +1,261 @@
+<div class="container" *ngIf="form">
+  <div class="col-12">
+    <h1 class="mt-2 fw-bold text-center font-monospace">Gold Calculation</h1>
+
+    <form [formGroup]="form" class="form-group border rounded mt-3">
+
+      <div class="d-flex align-items-center  m-3">
+        <div class="col-2 m-4">
+          <label>Gold Selling Price</label>
+          <img class="" src="../../../../../assets/img/gold_currencies_lost_ark_wiki_guide.png"
+            style="height:20px;width: 40px;">
+          <input id="first-name" type="number" class="form-control col-3" formControlName="gold">
+        </div>
+        <!-- <label for="first-name" class="form-label col-3" >Gold: </label> -->
+
+        <!-- <button class="pl-3 pr-3 btn btn-primary btn-sm" (click)="calculateRcPerGold()">Calculate</button> -->
+        <div class="col-6 border rounded">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">{{1 | currency}}</th>
+                <th scope="col">{{100 | currency}}</th>
+                <th scope="col">{{1000 | currency}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><img class="" src="../../../../../assets/img/gold_currencies_lost_ark_wiki_guide.png"
+                    style="height:20px;width: 40px;"></th>
+                <td>{{goldPerDollar | number}}</td>
+                <td>{{goldPerDollar *100 | number}}</td>
+                <td>{{goldPerDollar *1000 | number}}</td>
+
+              </tr>
+
+            </tbody>
+          </table>
+
+        </div>
+        <div class="col-3 m-3">
+          <span class="static-info"> to get <img class=""
+              src="../../../../../assets/img/gold_currencies_lost_ark_wiki_guide.png" style="height:20px;width: 40px;">
+            <input id="first-name" type="number" class="form-control col-3" formControlName="targetGold">
+            you need <span class="fw-bolder">{{ this.form.get('targetGold')?.value / goldPerDollar | currency}}</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="d-flex align-items-center m-3">
+        <div class="col-2 m-4">
+          <img class="" src="../../../../../assets/img/crystal.png"
+            style="height:20px;width: 40px;">
+        </div>
+        <!-- <label for="first-name" class="form-label col-3" >Gold: </label> -->
+
+        <!-- <button class="pl-3 pr-3 btn btn-primary btn-sm" (click)="calculateRcPerGold()">Calculate</button> -->
+        <div class="col-6 border rounded">
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">General/$</th>
+                <th scope="col">Weekly/$</th>
+                <th scope="col">Monthly/$</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><img class="" src="../../../../../assets/img/crystal.png"
+                    style="height:20px;width: 40px;"></th>
+                <td>{{crystalPerRc * this.standardRcPerDollar | number}}</td>
+                <td>{{crystalPerRcWeekly * this.standardRcPerDollar | number}}</td>
+                <td>{{crystalPerRcMonthly * this.standardRcPerDollar | number}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </form>
+
+
+
+  </div>
+  <h3 class="mt-2 fw-bold text-center">Worth to Buy it:</h3>
+
+  <div class="row border rounded mt-3" *ngIf="compareForm">
+    <div class="form-group" [formGroup]="compareForm">
+      <ng-container formArrayName="compareItems">
+        <ng-container *ngFor="let f of compareItems.controls; let i = index">
+
+          <div class="d-flex" [formGroupName]="i">
+            <div class="col-1 m-3">
+              <label for="first-name" class="form-label" >Name </label> 
+              <input id="first-name" type="text" class="form-control col-3" formControlName="name" [disabled]="true">
+            </div>
+            <div class="col-2 m-3">
+              <img class="" src="../../../../../assets/img/gold_currencies_lost_ark_wiki_guide.png"
+                style="height:20px;width: 40px;">
+              <input id="first-name" type="number" class="form-control col-3" formControlName="goldCost">
+            </div>
+            <div class="col-2 m-3">
+              <label for="first-name" class="form-label" >Amount </label> 
+              <input id="first-name" type="number" class="form-control col-3" formControlName="amount">
+            </div>
+            <div class="col-2 m-3">
+              <img class="" src="../../../../../assets/img/crystal.png" style="height:20px;width: 40px;">
+              <input id="first-name" type="number" class="form-control col-3" formControlName="crystalCost">
+            </div>
+            <button class="btn btn-outline-primary m-3" (click)="compare(i)">Compare</button>
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Money Cost</th>
+                  <th scope="col"><span>Amount</span><img class="" src="../../../../../assets/img/gold_currencies_lost_ark_wiki_guide.png"
+                    style="height:20px;width: 40px;"><span>worth</span></th>
+                  <th scope="col"><span>Amount</span><img class="" src="../../../../../assets/img/crystal.png"
+                    style="height:20px;width: 40px;"><span>worth</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td scope="row">{{f.get('goldToDollar')?.value | currency}}</td>
+                  <td>{{f.get('crystalToDollar')?.value | currency}}</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </ng-container>
+      </ng-container>
+      <div class="btn btn-outline-info col-2 m-3" (click)="addCompareItem()">AddItem</div>
+
+
+
+    </div>
+
+  </div>
+
+  <h3 class="mt-2 fw-bold text-center">Royal Worth to Buy it:</h3>
+
+  <div class="row border rounded mt-3" *ngIf="compareRoyalForm">
+    <div class="form-group" [formGroup]="compareRoyalForm">
+      <ng-container formArrayName="compareItems">
+        <ng-container *ngFor="let f of compareRoyalItems.controls; let i = index">
+
+          <div class="d-flex" [formGroupName]="i">
+            <div class="col-1 m-3">
+              <label for="first-name" class="form-label" >Name </label> 
+              <input id="first-name" type="text" class="form-control col-3" formControlName="name" [disabled]="true">
+            </div>
+            <div class="col-2 m-3">
+              <img class="" src="../../../../../assets/img/gold_currencies_lost_ark_wiki_guide.png"
+                style="height:20px;width: 40px;">
+              <input id="first-name" type="number" class="form-control col-3" formControlName="goldCost">
+            </div>
+            <div class="col-2 m-3">
+              <label for="first-name" class="form-label" >Amount </label> 
+              <input id="first-name" type="number" class="form-control col-3" formControlName="amount">
+            </div>
+            <div class="col-2 m-3">
+              <img class="" src="../../../../../assets/img/Royal_Crystals.webp" style="height:20px;width: 40px;">
+              <input id="first-name" type="number" class="form-control col-3" formControlName="crystalCost">
+            </div>
+            <button class="btn btn-outline-primary m-3" (click)="compareRoyal(i)">Compare</button>
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Money Cost</th>
+                  <th scope="col"><span>Amount</span><img class="" src="../../../../../assets/img/gold_currencies_lost_ark_wiki_guide.png"
+                    style="height:20px;width: 40px;"><span>worth</span></th>
+                  <th scope="col"><span>Amount</span><img class="" src="../../../../../assets/img/crystal.png"
+                    style="height:20px;width: 40px;"><span>worth</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td scope="row">{{f.get('goldToDollar')?.value | currency}}</td>
+                  <td>{{f.get('crystalToDollar')?.value | currency}}</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </ng-container>
+      </ng-container>
+      <div class="btn btn-outline-info col-2 m-3" (click)="addCompareRoyalItem()">AddItem</div>
+
+
+
+    </div>
+
+  </div>
+
+  <div class="row mt-3 ">
+    <div class="fw-medium">
+      Reference Equation:
+    </div>
+    <div class="d-flex m-2">
+      <span  class="fw-semibold">{{106.61 | currency}}</span> <span class="fw-light">(tax included)</span>
+      <img src="../../../../../assets/img/dollarSign.jpg" style="height:20px;width: 40px;">
+      <img src="../../../../../assets/img/arrow.png" style="height:20px;width: 40px;">
+      <span>12000</span>
+      <img src="../../../../../assets/img/royal_crystal.jpg" style="height:20px;width: 40px;">
+      <img src="../../../../../assets/img/equalSign.jpg" style="height:20px;width: 40px;">
+      <span class="ml-2 pl-2">{{standardRcPerDollar | number: '1.2-2'}}</span>
+      <img class="ml-2 pl-2" src="../../../../../assets/img/royal_crystal.jpg" style="height:20px;width: 40px;">
+      <span>per Dollar</span>
+    </div>
+    <div class="d-flex m-2">
+      <span  class="fw-semibold">{{8460}}</span> <span class="fw-light">(general)</span>
+      <img src="../../../../../assets/img/royal_crystal.jpg" style="height:20px;width: 40px;">
+      <img src="../../../../../assets/img/arrow.png" style="height:20px;width: 40px;">
+      <span>3600</span>
+      <img src="../../../../../assets/img/crystal.png" style="height:20px;width: 40px;">
+      <img src="../../../../../assets/img/equalSign.jpg" style="height:20px;width: 40px;">
+      <span class="ml-2 pl-2">{{3600/8460 | number: '1.2-2'}}</span>
+      <img class="ml-2 pl-2" src="../../../../../assets/img/crystal.png" style="height:20px;width: 40px;">
+      <span>per Dollar</span>
+      <img class="ml-2 pl-2" src="../../../../../assets/img/royal_crystal.jpg" style="height:20px;width: 40px;">
+
+    </div>
+
+    <div class="d-flex m-2">
+      <span  class="fw-semibold">{{4500}}</span> <span class="fw-light">(Weekly)</span>
+      <img src="../../../../../assets/img/royal_crystal.jpg" style="height:20px;width: 40px;">
+      <img src="../../../../../assets/img/arrow.png" style="height:20px;width: 40px;">
+      <span>2000</span>
+      <img src="../../../../../assets/img/crystal.png" style="height:20px;width: 40px;">
+      <img src="../../../../../assets/img/equalSign.jpg" style="height:20px;width: 40px;">
+      <span class="ml-2 pl-2">{{2000/4500 | number: '1.2-2'}}</span>
+      <img class="ml-2 pl-2" src="../../../../../assets/img/crystal.png" style="height:20px;width: 40px;">
+      <span>per Dollar</span>
+      <img class="ml-2 pl-2" src="../../../../../assets/img/royal_crystal.jpg" style="height:20px;width: 40px;">
+
+    </div>
+    <div class="d-flex m-2">
+      <span  class="fw-semibold">{{8000}}</span> <span class="fw-light">(Monthly)</span>
+      <img src="../../../../../assets/img/royal_crystal.jpg" style="height:20px;width: 40px;">
+      <img src="../../../../../assets/img/arrow.png" style="height:20px;width: 40px;">
+      <span>3600</span>
+      <img src="../../../../../assets/img/crystal.png" style="height:20px;width: 40px;">
+      <img src="../../../../../assets/img/equalSign.jpg" style="height:20px;width: 40px;">
+      <span class="ml-2 pl-2">{{3600/8000 | number: '1.2-2'}}</span>
+      <img class="ml-2 pl-2" src="../../../../../assets/img/crystal.png" style="height:20px;width: 40px;">
+      <span>per Dollar</span>
+      <img class="ml-2 pl-2" src="../../../../../assets/img/royal_crystal.jpg" style="height:20px;width: 40px;">
+
+    </div>
+
+  </div>
+
+
+</div>
+
