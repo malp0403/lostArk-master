@@ -25,9 +25,9 @@ export class CraftPrimeComponent {
       marketAmount: this.fb.control(1),
       items: this.fb.array([])
     })
-    this.addItem("Oreha Solar Carp",52,22,10);
-    this.addItem("Natural Pearl",69,4,10);
-    this.addItem("Fish",142,127,100);
+    this.addItem("Oreha Solar Carp",52,36,10);
+    this.addItem("Natural Pearl",69,6,10);
+    this.addItem("Fish",142,42,100);
 
   }
 
